@@ -13,7 +13,20 @@ export default [
   },
   {
     languageOptions: {
-      globals: { ...globals.browser, ...globals.node },
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        $t: true,
+        uni: true,
+        UniApp: true,
+        wx: true,
+        WechatMiniprogram: true,
+        getCurrentPages: true,
+        UniHelper: true,
+        Page: true,
+        App: true,
+        NodeJS: true
+      },
       parser: parserVue
     }
   },
@@ -28,11 +41,23 @@ export default [
   },
   {
     rules: {
-      "no-unused-vars": ["error"],
-      "prettier/prettier": ["error"],
+      "no-undef": ["off"],
       "no-console": ["off"],
+      "no-redeclare": ["off"],
+      "prettier/prettier": [
+        "warn",
+        {
+          singleQuote: false,
+          semi: true,
+          printWidth: 160,
+          trailingComma: "none",
+          endOfLine: "auto"
+        }
+      ],
       "vue/multi-word-component-names": ["off"],
-      "no-redeclare": ["off"]
+      "vue/no-setup-props-destructure": ["off"],
+      "vue/no-deprecated-html-element-is": ["off"],
+      "@typescript-eslint/no-unused-vars": ["off"]
     }
   }
 ];

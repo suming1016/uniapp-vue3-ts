@@ -1,0 +1,21 @@
+{
+  // 推荐的扩展插件
+  "recommendations": [
+    "vue.volar",
+    "stylelint.vscode-stylelint",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "antfu.iconify",
+    "evils.uniapp-vscode", // uni-app 文档
+    "mrmaoddxxaa.create-uniapp-view", // 创建 uni-app 页面
+    "uni-helper.uni-helper-vscode", // uni-app 代码提示
+    "uni-helper.uni-app-schemas-vscode",
+    "uni-helper.uni-highlight-vscode",
+    "uni-helper.uni-ui-snippets-vscode",
+    "uni-helper.uni-app-snippets-vscode",
+    "uni-helper.uni-cloud-snippets-vscode",
+    "mrmlnc.vscode-json5",
+    "editorconfig.editorconfig", // editorconfig
+    "vue.vscode-typescript-vue-plugin" // vue3 ts 插件
+  ]
+}

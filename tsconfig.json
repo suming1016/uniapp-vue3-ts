@@ -11,15 +11,16 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@img": ["./src/static/images/*"]
     },
     "lib": ["esnext", "dom"],
-    "types": ["@dcloudio/types", "@types/wechat-miniprogram", "@uni-helper/uni-app-types"]
+    "types": ["@dcloudio/types", "@types/wechat-miniprogram", "@uni-helper/uni-app-types", "wot-design-uni/global"]
   },
   "vueCompilerOptions": {
     "target": 3,
     "plugins": ["@uni-helper/uni-app-types/volar-plugin"]
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/**/*.json"]
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.jsx", "src/**/*.vue", "src/**/*.json"]
 }
