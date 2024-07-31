@@ -77,6 +77,7 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useRequest: typeof import('../hooks/useRequest')['default']
+  const useSequentialRequest: typeof import('../hooks/useSequentialRequest')['useSequentialRequest']
   const useSlots: typeof import('vue')['useSlots']
   const useUpload: typeof import('../hooks/useUpload')['default']
   const watch: typeof import('vue')['watch']
@@ -167,6 +168,7 @@ declare module 'vue' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
+    readonly useSequentialRequest: UnwrapRef<typeof import('../hooks/useSequentialRequest')['useSequentialRequest']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
@@ -250,6 +252,7 @@ declare module '@vue/runtime-core' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
+    readonly useSequentialRequest: UnwrapRef<typeof import('../hooks/useSequentialRequest')['useSequentialRequest']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>

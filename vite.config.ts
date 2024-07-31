@@ -17,10 +17,11 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
   // process.cwd(): 获取当前文件的目录跟地址
   // loadEnv(): 返回当前环境env文件中额外定义的变量
   console.log("command", command, mode, isSsrBuild, isPreview);
-  const env = loadEnv(mode, process.cwd(), "");
+  // const env = loadEnv(mode, process.cwd(), "");
+  const env = loadEnv(mode, path.resolve(process.cwd(), ""));
   const { VITE_APP_PORT, VITE_SERVER_BASEURL, VITE_DELETE_CONSOLE, VITE_SHOW_SOURCEMAP, VITE_APP_PROXY, VITE_APP_PROXY_PREFIX } = env;
   const { UNI_PLATFORM } = process.env;
-  console.log("环境变量 env -> ", env);
+  console.log("环境变量 env -> ", env, VITE_APP_PORT, VITE_SERVER_BASEURL, VITE_DELETE_CONSOLE, VITE_SHOW_SOURCEMAP, VITE_APP_PROXY, VITE_APP_PROXY_PREFIX);
   console.log("isH5: ", UNI_PLATFORM === "h5"); // 得到 mp-weixin, h5, app 等
   return {
     resolve: {

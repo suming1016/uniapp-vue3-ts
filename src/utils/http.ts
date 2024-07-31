@@ -1,9 +1,33 @@
 import { CustomRequestOptions } from "@/interceptors/request";
-
+// 用于存储每个请求的 map，键为请求的唯一标识（URL + 参数字符串）
+const requestMap = new Map<string, UniApp.RequestTask>();
 export const http = <T>(options: CustomRequestOptions) => {
-  // 1. 返回 Promise 对象
+  // 生成请求的唯一标识
+  let requestKey: string = "";
+  const method = options.method.toUpperCase();
+
+  // 根据请求方法决定如何生成唯一标识
+  switch (method) {
+    case "GET":
+      requestKey += `_${JSON.stringify(options.query)}`;
+      break;
+    case "POST":
+    case "PUT":
+    case "DELETE":
+      requestKey += `_${JSON.stringify(options.data)}`;
+      break;
+    default:
+      // 如果是其他方法，可能不需要额外的参数，或者需要特殊处理
+      break;
+  }
+  // 如果当前有相同请求正在处理，先取消它
+  if (requestMap.has(requestKey)) {
+    requestMap.get(requestKey).abort();
+    requestMap.delete(requestKey);
+  }
+
   return new Promise<IResData<T>>((resolve, reject) => {
-    uni.request({
+    const requestTask = uni.request({
       ...options,
       dataType: "json",
       // #ifndef MP-WEIXIN
@@ -11,9 +35,7 @@ export const http = <T>(options: CustomRequestOptions) => {
       // #endif
       // 响应成功
       success(res) {
-        // 状态码 2xx，参考 axios 的设计
         if (res.statusCode >= 200 && res.statusCode < 300) {
-          // 2.1 提取核心数据 res.data
           resolve(res.data as IResData<T>);
         } else if (res.statusCode === 401) {
           // 401错误  -> 清理用户信息，跳转到登录页
@@ -30,15 +52,20 @@ export const http = <T>(options: CustomRequestOptions) => {
           reject(res);
         }
       },
-      // 响应失败
       fail(err) {
         uni.showToast({
           icon: "none",
           title: "网络错误，换个网络试试"
         });
         reject(err);
+      },
+      complete(res) {
+        // 清除当前请求
+        requestMap.delete(requestKey);
       }
     });
+    // 保存当前请求
+    requestMap.set(requestKey, requestTask);
   });
 };
 

@@ -1,12 +1,13 @@
 // TODO: 别忘加更改环境变量的 VITE_UPLOAD_BASEURL 地址。
 const VITE_UPLOAD_BASEURL = import.meta.env.VITE_UPLOAD_BASEURL;
+type FormDataValue = string | number | boolean | File | Blob;
 
 /**
  * useUpload 是一个定制化的请求钩子，用于处理上传图片。
  * @param formData 额外传递给后台的数据，如{name: '姓名'}。
  * @returns 返回一个对象{loading, error, data, run}，包含请求的加载状态、错误信息、响应数据和手动触发请求的函数。
  */
-export default function useUpload<T = string>(formData: Record<string, any> = {}) {
+export default function useUpload<T = string>(formData: Record<string, FormDataValue> = {}) {
   const loading = ref(false);
   const error = ref(false);
   const data = ref<T>();

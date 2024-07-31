@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "appid": "",
+  "name": "uniapp-vue3-ts",
+  "appid": "H5871D791",
   "description": "",
   "versionName": "1.0.0",
   "versionCode": "100",
@@ -83,7 +83,7 @@
   },
   "quickapp": {},
   "mp-weixin": {
-    "appid": "",
+    "appid": "wxa2abb91f64032a2b",
     "setting": {
       "urlCheck": false
     },
@@ -103,7 +103,10 @@
     "enable": false
   },
   "vueVersion": "3",
+  "locale": "zh-Hans",
   "h5": {
-    "router": {}
+    "router": {
+      "base": "/v3-uniapp/"
+    }
   }
 }

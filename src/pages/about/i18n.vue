@@ -42,16 +42,14 @@
 </template>
 
 <script lang="ts" setup>
-import i18n from "@/locale/index";
+import i18n, { t } from "@/locale/index";
 import { testI18n } from "@/utils/i18n";
 import { useI18n } from "vue-i18n";
-
-const { t } = useI18n();
 
 onLoad(() => {
   // #ifdef MP-WEIXIN
   // fix 微信小程序需要手动调用 api 设置一次国际化标题。
-  uni.setNavigationBarTitle({ title: t("app.name") });
+  uni.setNavigationBarTitle({ title: useI18n().t("app.name") });
   // #endif
 });
 const current = ref(uni.getLocale());
@@ -74,7 +72,6 @@ const radioChange = evt => {
   // 下面2句缺一不可！！！
   uni.setLocale(evt.detail.value);
   i18n.global.locale = evt.detail.value;
-  uni.setNavigationBarTitle({ title: t("app.name") });
 };
 </script>
 

@@ -2,49 +2,75 @@
 <route lang="json5" type="home">
 {
   style: {
-    navigationStyle: "custom",
-    navigationBarTitleText: "首页"
+    // navigationStyle: "custom",
+    navigationBarTitleText: "%tabbar.home%"
   }
 }
 </route>
 <template>
-  <view class="bg-white overflow-hidden pt-2 px-4" :style="{ marginTop: safeAreaInsets?.top + 'px' }">
-    <view class="mt-12">
-      <image src="/static/logo.svg" alt="" class="w-28 h-28 block mx-auto" />
-    </view>
-    <view class="text-center text-4xl main-title-color mt-4">unibest</view>
-    <view class="text-center text-2xl mt-2 mb-8">最好用的 uniapp 开发模板</view>
-
-    <view class="text-justify max-w-100 m-auto text-4 indent mb-2">{{ description }}</view>
+  <view :style="{ marginTop: safeAreaInsets?.top + 'px' }">
     <view class="text-center mt-8">
       当前平台是：
       <text class="text-green-500">{{ PLATFORM.platform }}</text>
     </view>
-    <view class="text-center mt-4">
-      模板分支是：
-      <text class="text-green-500">i18n</text>
-    </view>
+    <wd-button @click="setUserInfo">测试pinia持久化</wd-button>
+    <wd-button type="success" @click="safeFetchData">测试取消请求</wd-button>
+    <wd-button type="success" @click="testDown">测试</wd-button>
   </view>
-  <tabbar />
+  <wd-tabs v-model="tab">
+    <block v-for="item in 4" :key="item">
+      <wd-tab :title="`标签${item}`">
+        <view class="content">内容{{ item }}</view>
+      </wd-tab>
+    </block>
+  </wd-tabs>
 </template>
 
 <script lang="ts" setup>
 import PLATFORM from "@/utils/platform";
-
+import { useUserStore } from "@/store";
+// import { useSequentialRequest } from "@/hooks/useSequentialRequest";
+import { http } from "@/utils/http";
 defineOptions({
   name: "Home"
 });
-
+const userStore = useUserStore();
+const setUserInfo = () => {
+  userStore.setUserInfo({ nickname: "菲鸽", avatar: "", token: "abcdef" });
+};
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync();
-const author = ref("姓名");
-const description = ref(
-  "unibest 是一个集成了多种工具和技术的 uniapp 开发模板，由 uniapp + Vue3 + Ts + Vite4 + UniUI + VSCode 构建，模板具有代码提示、自动格式化、统一配置、代码片段等功能，并内置了许多常用的基本组件和基本功能，让你编写 uniapp 拥有 best 体验。"
-);
+const tab = ref<number>(0);
 // 测试 uni API 自动引入
-onLoad(() => {
-  console.log(author);
-});
+onLoad(() => {});
+async function fetchData(signal: AbortSignal) {
+  const data = await fetch("https://pcapi-xiaotuxian-front-devtest.itheima.net/home/banner", { signal });
+  console.log(await data.json());
+}
+
+// const safeFetchData = useSequentialRequest(fetchData);
+const safeFetchData = () => {
+  http.get("https://pcapi-xiaotuxian-front-devtest.itheima.net/home/banner").then(res => {
+    console.log(res);
+  });
+};
+const testDown = () => {
+  http({
+    url: "http://172.27.240.129:8093/api/a/tDyWages/template",
+    method: "POST",
+    responseType: "arraybuffer"
+  }).then(res => {
+    console.log(res);
+  });
+  // fetch(`http://172.27.240.129:8093/api/a/tDyWages/template`, { method: "post", headers: { "content-type": "application/json" } })
+  //   .then(response => {
+  //     console.log(response);
+  //     return response.blob();
+  //   })
+  //   .then(res => {
+  //     console.log(res);
+  //   });
+};
 </script>
 
 <style>

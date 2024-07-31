@@ -4,7 +4,7 @@ import path from "node:path";
 import { loadEnv } from "vite";
 
 // 获取环境变量的范例
-const env = loadEnv(process.env.NODE_ENV!, path.resolve(process.cwd(), "env"));
+const env = loadEnv(process.env.NODE_ENV!, path.resolve(process.cwd(), ""));
 const { VITE_APP_TITLE, VITE_UNI_APPID, VITE_WX_APPID, VITE_APP_PUBLIC_BASE, VITE_FALLBACK_LOCALE } = env;
 
 export default defineManifestConfig({
