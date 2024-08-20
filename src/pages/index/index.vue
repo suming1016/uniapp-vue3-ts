@@ -71,6 +71,34 @@ const testDown = () => {
   //     console.log(res);
   //   });
 };
+enum Color {
+  Red,
+  Yellow,
+  Blue,
+  Pink
+}
+
+let color: Color;
+
+switch (color) {
+  case Color.Red:
+    // do something
+    break;
+
+  case Color.Yellow:
+    // do something
+    break;
+
+  case Color.Blue:
+    // do something
+    break;
+
+  default:
+    // throw new Error(`Unhandled color: ${color}`);
+    color as never;
+
+    break;
+}
 </script>
 
 <style>

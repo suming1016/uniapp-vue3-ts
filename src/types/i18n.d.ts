@@ -1,8 +1,8 @@
-export {}
+export {};
 
-declare module 'vue' {
+declare module "vue" {
   interface ComponentCustomProperties {
-    $t: (key: string, opt?: Record<string, any>) => string
-    $tm: (key: string, opt?: Record<string, any>) => [] | { [p: string]: any }
+    $t: (key: string, opt?: Record<string, unknown>) => string;
+    $tm: (key: string, opt?: Record<string, unknown>) => [] | { [p: string]: unknown };
   }
 }
